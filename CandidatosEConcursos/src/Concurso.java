@@ -21,14 +21,6 @@ public class Concurso {
         return this.areas;
     }
 
-    public String imprimeAreas(){
-        String listaAreas = "";
-        for (int i = 0; i < this.areas.size(); i++) {
-            listaAreas += this.areas.get(i) + ", ";
-        }
-        return listaAreas.substring(0, listaAreas.length()-2); //retira vírgula e espaço em branco do fim
-    }
-
     @Override
     public String toString() {
         return this.orgao + "\t\tEdital: " + this.edital + "\t\tCodigo: " + this.codigo;
