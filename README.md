@@ -1,4 +1,4 @@
-[# Documentação do Projeto ConsuLEDS
+[# Documentação do Projeto ConsuLEDS](README.md)
 
 ## Introdução
 
@@ -88,4 +88,3 @@ A classe `Consulta` contém métodos para realizar consultas com base no CPF do 
 - `encontrarCandidatoPorCPF(String CPF, ArrayList<Candidato> listaDeCandidatos)`: Encontra um candidato por CPF.
 - `encontrarConcursoPorCodigo(String cod, ArrayList<Concurso> listaDeConcursos)`: Encontra um concurso por código.
 
-](README.md)
