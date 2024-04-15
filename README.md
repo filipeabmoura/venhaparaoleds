@@ -1,74 +1,91 @@
-# Teste de admissão para o LEDS
+[# Documentação do Projeto ConsuLEDS
 
-O desafio é desenvolver um programa que permita realizar as seguintes buscas: 
-1. Listar os **órgãos, códigos e editais dos concursos públicos** que se encaixam no perfil do candidato, tomando como base o seu **CPF**; 
-2. Listar o **nome, data de nascimento e o CPF** dos candidatos que se encaixam no perfil do concurso tomando com base o **Código do Concurso** do concurso público;
+## Introdução
 
-O arquivo **candidatos.txt** contém as informações dos candidatos:
+O projeto ConsuLEDS é um sistema de consulta que permite buscar concursos disponíveis para candidatos e candidatos elegíveis para concursos. Ele carrega informações sobre candidatos e concursos a partir de arquivos `.txt` e realiza consultas com base no CPF do candidato ou no código do concurso.
 
-| Nome  | Data de Nascimento  | CPF |  Profissões|
-|---|---|---|---|
-| Lindsey Craft  |  19/05/1976  |  182.845.084-34  |  [carpinteiro]  | 
-| Jackie Dawson  |  14/08/1970  |  311.667.973-47  |  [marceneiro, assistente administrativo]  |
-| Cory Mendoza |   11/02/1957 |  565.512.353-92  |  [carpinteiro, marceneiro] |
+## Classes
 
-O arquivo **concursos.txt** contém as informações dos concursos públicos:
+### Main
 
-| Órgão  | Edital  | Código do Concurso | Lista de vagas|
-|---|---|---|---|
-| SEDU  | 9/2016  |  61828450843  |  [analista de sistemas, marceneiro]  | 
-| SEJUS | 15/2017  |  61828450843  |  [carpinteiro,professor de matemática,assistente administrativo] |
-| SEJUS | 17/2017 |  95655123539  |  [professor de matemática] |
+A classe `Main` é a classe principal do projeto. Ela é responsável por inicializar o sistema, carregar os dados dos candidatos e concursos e exibir o menu de opções para o usuário.
 
-**Escolha as tecnologias que você usará e monte uma solução completa para rodar a aplicação**.
+#### Métodos
 
-Para enviar o resultado, basta realizar um **Fork** deste repositório e **abrir um Pull Request** **com seu nome e o número de inscrição**.  
+- `main(String[] args)`: Método principal que inicializa o sistema e gerencia as consultas.
 
-**Atenção: você deve enviar apenas o código fonte. Não serão aceitos códigos compilados**.
+### Concurso
 
-Por fim, você deve atualizar o Readme.md com as seguintes informações: 
-1. Documentação da solução;
-2. Lista dos diferenciais implementados. 
+A classe `Concurso` representa um concurso público. Ela contém informações como órgão, edital, código e áreas de vagas.
 
+#### Atributos
 
-## Avaliação
+- `orgao`: String que representa o órgão responsável pelo concurso.
+- `edital`: String que representa o edital do concurso.
+- `codigo`: String que representa o código do concurso.
+- `areas`: ArrayList de Strings que representa as áreas de vagas do concurso.
 
-O programa será avaliado levando em conta os seguintes critérios:
+### Candidato
 
-| Critério  | Valor | 
-|---|---|
-| Legibilidade do Código |  10  |
-| Documentação do código |  10  |
-| Documentação da solução |  10  |
-| Tratamento de Erros | 10 | 
-| Total | 40 |
+A classe `Candidato` representa um candidato. Ela contém informações como nome, data de nascimento, CPF e profissões.
 
-A sua pontuação será a soma dos valores obtidos nos critérios acima.
+#### Atributos
 
-## Diferenciais 
+- `nome`: String que representa o nome do candidato.
+- `dataNascimento`: Objeto da classe `Data` que representa a data de nascimento do candidato.
+- `cpf`: String que representa o CPF do candidato.
+- `profissoes`: ArrayList de Strings que representa as profissões do candidato.
 
-Você pode aumentar a sua pontuação no processo de seleção implementando um ou mais dos itens abaixo:
+### Data
 
-| Item  | Pontos Ganhos | 
-|---|---|
-| Criar um [serviço](https://martinfowler.com/articles/microservices.html) com o problema |  30  |
-| Utilizar banco de dados |  30  |
-| Implementar Clean Code |  20  |
-| Implementar o padrão de programação da tecnologia escolhida |  20  |
-| Qualidade de [Código com SonarQube](https://about.sonarcloud.io/) |  15  |
-| Implementar testes unitários |  15  |
-| Implementar testes comportamentais |  15  |
-| Implementar integração com [Github Action](https://github.com/features/actions)  |  10  |
-| Implementar integração com Github Action + SonarQube |  10  |
-| Implementar usando Docker | 5 |
-| Total| 170 |
+A classe `Data` representa uma data, com dia, mês e ano.
 
-Na sua nota final serâo acrescidos os pontos referentes aos itens implementados corretamente.
+#### Atributos
 
-## Penalizações
+- `dia`: String que representa o dia.
+- `mes`: String que representa o mês.
+- `ano`: String que representa o ano.
 
-Você será desclassifiado nas seguintes situações:
+### EntradaTXT
 
-1. Se submeter um solução que não funcione; 
-2. Se não cumprir os critérios presentes no seção **Avaliação**;
-3. Se cometer plágio.
+A classe `EntradaTXT` é uma classe base para leitura de arquivos `.txt`. Ela contém um Scanner para ler o arquivo.
+
+#### Atributos
+
+- `input`: Scanner para ler o arquivo.
+
+#### Métodos
+
+- `EntradaTXT(String caminho)`: Construtor que inicializa o Scanner com o caminho do arquivo.
+
+### EntradaCandidatoTXT
+
+A classe `EntradaCandidatoTXT` herda de `EntradaTXT` e é especializada para ler arquivos de candidatos.
+
+#### Métodos
+
+- `montarListaDeCandidatos(ArrayList<Candidato> listaDeCandidatos)`: Lê o arquivo de candidatos e preenche a lista de candidatos.
+
+### EntradaConcursoTXT
+
+A classe `EntradaConcursoTXT` herda de `EntradaTXT` e é especializada para ler arquivos de concursos.
+
+#### Métodos
+
+- `montarListaDeConcursos(ArrayList<Concurso> listaDeConcursos)`: Lê o arquivo de concursos e preenche a lista de concursos.
+
+### Consulta
+
+A classe `Consulta` contém métodos para realizar consultas com base no CPF do candidato ou no código do concurso.
+
+#### Métodos
+
+- `imprimirArraylist(ArrayList<Object> lista)`: Imprime uma lista de objetos. A lista contém todos os objetos do tipo Candidato ou todos os objetos do tipo Concurso.
+- `consultaPorCPF(ArrayList<Candidato> listadeCandidatos, ArrayList<Concurso> listaDeConcursos)`: Realiza uma consulta por CPF. Chama o método `listaConcursosParaUmCandidato` para montar uma lista com os concursos para os quais o candidato é elegível; chama o método `imprimirArraylist` que lista os mesmos concursos (órgãos, códigos e editais) na tela. Este método público é invocado pela `Main`.
+- `consultaPorCodigo(ArrayList<Candidato> listadeCandidatos, ArrayList<Concurso> listaDeConcursos)`: Realiza uma consulta por código. Chama o método `listaCandidatosParaUmConcurso` para montar uma lista com os candidatos elegíveis para este concurso; chama o método `imprimirArraylist` que lista os mesmos candidatos (nome, data de nascimento e o CPF) na tela. Este método público é invocado pela `Main`.
+- `listaConcursosParaUmCandidato(Candidato candidato, ArrayList<Concurso> listaDeConcursos)`: Retorna uma lista de concursos para um candidato.
+- `listaCandidatosParaUmConcurso(Concurso concurso, ArrayList<Candidato> listaDeCandidatos)`: Retorna uma lista de candidatos elegíveis para um concurso.
+- `encontrarCandidatoPorCPF(String CPF, ArrayList<Candidato> listaDeCandidatos)`: Encontra um candidato por CPF.
+- `encontrarConcursoPorCodigo(String cod, ArrayList<Concurso> listaDeConcursos)`: Encontra um concurso por código.
+
+](README.md)
